@@ -13,6 +13,7 @@ export const ViewA = () => {
     }
   }, [ws]);
 
+  // send click position to socket server
   const handleClick = (event) => {
     const x = event.clientX;
     const y = event.clientY;
@@ -33,7 +34,7 @@ export const ViewA = () => {
         style={{ 
           backgroundColor: 'green', 
           width: '500px', 
-          height: '200px', 
+          height: '600px', 
           position: 'absolute', 
           top: '0px', 
           left: '0px',
@@ -55,21 +56,39 @@ export const ViewA = () => {
           zIndex: 10, // Ensure the cursor is above the buttons
         }} />
         <div 
-          style={{backgroundColor: 'white', position: 'absolute', width:'100px', height:'40px', top: '10px', left: '10px', zIndex: 1}}
+          style={{backgroundColor: 'white', position: 'absolute', width:'150px', height:'50px', top: '5px', left: '5px'}}
           onClick={() => console.log('button A clicked!')}
+          id='button A'
         >
           button A
         </div>
         <div 
-          style={{backgroundColor: 'white', position: 'absolute', width:'100px', height:'40px', top: '10px', left: '160px', zIndex: 1}}
+          style={{backgroundColor: 'white', position: 'absolute', width:'150px', height:'50px', top: '5px', left: '200px'}}
           onClick={() => console.log('button B clicked!')}
+          id='button B'
         >
           button B
         </div>
         <div 
-          style={{backgroundColor: 'white', position: 'absolute', width:'40px', height:'40px', top: '110px', left: '160px', borderRadius: '20px', zIndex: 1}}
+          style={{backgroundColor: 'white', position: 'absolute', width:'400px', height:'350px', top: '200px', left: '20px', padding: '2rem', overflow: 'hidden', boxSizing: 'border-box'}}
+          onClick={() => console.log('iframe clicked!')}
+          id='remoteIframe'
         >
-          button C
+          <div>
+            <button style={{fontSize: '25px'}} onClick={() => alert('iframe button click!')}>Button</button>
+          </div>
+          <h1 onClick={() => console.log('text clicked!')}>Vite + React</h1>
+          <div className="card">
+            <button >
+              count is 
+            </button>
+            <p>
+              Edit <code>src/App.jsx</code> and save to test HMR
+            </p>
+          </div>
+          <p className="read-the-docs">
+            Click on the Vite and React logos to learn more
+          </p>
         </div>
       </div>
     </div>
