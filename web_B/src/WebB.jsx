@@ -14,20 +14,23 @@ export const ViewB = () => {
     }
   }, [ws]);
 
-    const initWebSocket = () => {
+  const initWebSocket = () => {
     ws.on('sendPosition', (position) => {
-      // Check if the received position is within button A
       const configPositionX = position.x
       const configPositionY = position.y
+      // select DOM based on receive position
       const element = document.elementFromPoint(configPositionX, configPositionY)
       if (element.tagName !== 'IFRAME') {
         element.click()
       } else {
+        // calculate click position relatively inside iframe
+        const iframeXPosition = element.getBoundingClientRect().x
+        const iframeYPosition = element.getBoundingClientRect().y
         // send message to iframe source 
-        element.contentWindow.postMessage({"x": configPositionX, "y": configPositionY}, "http://localhost:5174/");
+        element.contentWindow.postMessage({"x": configPositionX - iframeXPosition, "y": configPositionY - iframeYPosition}, "http://localhost:5174/");
       }
-  })
-}
+    })
+  }
 
   return (
     <div>
