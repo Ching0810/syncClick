@@ -23,7 +23,8 @@ export const ViewB = () => {
       if (element.tagName !== 'IFRAME') {
         element.click()
       } else {
-        element.contentWindow.postMessage({"x": configPositionX, "y": configPositionY}, "http://localhost:5175/");
+        // send message to iframe source 
+        element.contentWindow.postMessage({"x": configPositionX, "y": configPositionY}, "http://localhost:5174/");
       }
   })
 }
