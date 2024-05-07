@@ -16,18 +16,25 @@ export const ViewB = () => {
 
   const initWebSocket = () => {
     ws.on('sendPosition', (position) => {
-      const configPositionX = position.x
-      const configPositionY = position.y
+      const remotePositionX = position.x
+      const remotePositionY = position.y
+      const remoteWindowX = position.windowX
+      const remoteWindowY = position.windowY
+      const machinePositionX = remotePositionX * window.innerWidth / remoteWindowX
+      const machinePositionY = remotePositionY * window.innerHeight / remoteWindowY
+      
       // select DOM based on receive position
-      const element = document.elementFromPoint(configPositionX, configPositionY)
+      const element = document.elementFromPoint(machinePositionX, machinePositionY)
       if (element.tagName !== 'IFRAME') {
         element.click()
+        console.log(remoteWindowX, remoteWindowY)
       } else {
+        console.log('iframe click!')
         // calculate click position relatively inside iframe
         const iframeXPosition = element.getBoundingClientRect().x
         const iframeYPosition = element.getBoundingClientRect().y
         // send message to iframe source 
-        element.contentWindow.postMessage({"x": configPositionX - iframeXPosition, "y": configPositionY - iframeYPosition}, "http://localhost:5174/");
+        element.contentWindow.postMessage({x: machinePositionX - iframeXPosition, y: machinePositionY - iframeYPosition}, "http://localhost:5174/");
       }
     })
   }
@@ -35,7 +42,7 @@ export const ViewB = () => {
   return (
     <div>
       <div 
-        style={{ backgroundColor: 'blue', width: '500px', height: '600px', position: 'absolute', left: '0', top: '0', display: 'flex', flexDirection: 'column' }}
+        style={{ backgroundColor: 'blue', width: '100%', height: '100vh', position: 'absolute', left: '0', top: '0', display: 'flex', flexDirection: 'column' }}
         id='background'
       >
         <div 

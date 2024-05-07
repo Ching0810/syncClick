@@ -5,6 +5,7 @@ window.addEventListener('message', function (event) {
    }
    var {x, y} = event.data
    var element = document.elementFromPoint(x, y);
+   console.log(element)
    var message
    // message event should receive from machine page which contain iframe
    if (event.origin !== "http://localhost:5175") {

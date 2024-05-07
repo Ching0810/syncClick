@@ -4,10 +4,10 @@ const Iframe = () => {
       style={{
         backgroundColor: 'white', 
         position: 'absolute', 
-        width: '400px', 
-        height: '350px', 
-        top: '200px', 
-        left: '20px',
+        width: '50%', 
+        height: '50%', 
+        top: '30%', 
+        left: '10%',
         overflow: 'hidden'
       }}
       onClick={() => console.log('machine iframe clicked!')}
