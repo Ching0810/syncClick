@@ -33,8 +33,12 @@ export const ViewB = () => {
         // calculate click position relatively inside iframe
         const iframeXPosition = element.getBoundingClientRect().x
         const iframeYPosition = element.getBoundingClientRect().y
-        // send message to iframe source 
-        element.contentWindow.postMessage({x: machinePositionX - iframeXPosition, y: machinePositionY - iframeYPosition}, "http://localhost:5174/");
+
+        element.contentWindow.postMessage({
+          type: 'click',
+          data: { x: machinePositionX - iframeXPosition, y: machinePositionY - iframeYPosition },
+          origin: 'http://localhost:5175' // Ensure this matches the origin of your iframe
+        }, '*')
       }
     })
   }
